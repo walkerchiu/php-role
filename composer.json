@@ -1,0 +1,39 @@
+{
+    "name": "walkerchiu/php-role",
+    "type": "library",
+    "authors": [
+        {
+            "name":  "Walker Chiu",
+            "email": "chenjen.chiou@gmail.com"
+        }
+    ],
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.3",
+        "walkerchiu/php-core": "^1.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^5.0"
+    },
+    "suggest": {
+        "walkerchiu/php-account": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "WalkerChiu\\Role\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "WalkerChiu\\Role\\RoleServiceProvider"
+            ],
+            "aliases": {
+                "Role":       "WalkerChiu\\Role\\Models\\Entities\\Role",
+                "Permission": "WalkerChiu\\Role\\Models\\Entities\\Permission"
+            }
+        }
+    }
+}
