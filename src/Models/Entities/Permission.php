@@ -2,10 +2,10 @@
 
 namespace WalkerChiu\Role\Models\Entities;
 
-use WalkerChiu\Core\Models\Entities\Entity;
 use WalkerChiu\Core\Models\Entities\LangTrait;
+use WalkerChiu\Core\Models\Entities\UuidEntity;
 
-class Permission extends Entity
+class Permission extends UuidEntity
 {
     use LangTrait;
 

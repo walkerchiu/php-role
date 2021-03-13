@@ -9,8 +9,8 @@ class CreateWkRoleTable extends Migration
     public function up()
     {
         Schema::create(config('wk-core.table.role.roles'), function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->nullableMorphs('host');
+            $table->uuid('id');
+            $table->nullableUuidMorphs('host');
             $table->string('serial')->nullable();
             $table->string('identifier');
             $table->boolean('is_enabled')->default(0);
@@ -18,16 +18,16 @@ class CreateWkRoleTable extends Migration
             $table->timestampsTz();
             $table->softDeletes();
 
+            $table->primary('id');
             $table->index('serial');
             $table->index('identifier');
             $table->index('is_enabled');
-            $table->index(['host_type', 'host_id', 'is_enabled']);
         });
         if (!config('wk-role.onoff.core-lang_core')) {
             Schema::create(config('wk-core.table.role.roles_lang'), function (Blueprint $table) {
-                $table->bigIncrements('id');
-                $table->nullableMorphs('morph');
-                $table->unsignedBigInteger('user_id')->nullable();
+                $table->uuid('id');
+                $table->nullableUuidMorphs('morph');
+                $table->uuid('user_id')->nullable();
                 $table->string('code');
                 $table->string('key');
                 $table->text('value')->nullable();
@@ -40,11 +40,13 @@ class CreateWkRoleTable extends Migration
                     ->on(config('wk-core.table.user'))
                     ->onDelete('set null')
                     ->onUpdate('cascade');
+
+                $table->primary('id');
             });
         }
 
         Schema::create(config('wk-core.table.role.permissions'), function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->uuid('id');
             $table->string('serial')->nullable();
             $table->string('identifier');
             $table->boolean('is_enabled')->default(0);
@@ -52,15 +54,16 @@ class CreateWkRoleTable extends Migration
             $table->timestampsTz();
             $table->softDeletes();
 
+            $table->primary('id');
             $table->index('serial');
             $table->index('identifier');
             $table->index('is_enabled');
         });
         if (!config('wk-role.onoff.core-lang_core')) {
             Schema::create(config('wk-core.table.role.permissions_lang'), function (Blueprint $table) {
-                $table->bigIncrements('id');
-                $table->nullableMorphs('morph');
-                $table->unsignedBigInteger('user_id')->nullable();
+                $table->uuid('id');
+                $table->nullableUuidMorphs('morph');
+                $table->uuid('user_id')->nullable();
                 $table->string('code');
                 $table->string('key');
                 $table->text('value')->nullable();
@@ -73,12 +76,14 @@ class CreateWkRoleTable extends Migration
                     ->on(config('wk-core.table.user'))
                     ->onDelete('set null')
                     ->onUpdate('cascade');
+
+                $table->primary('id');
             });
         }
 
         Schema::create(config('wk-core.table.role.roles_permissions'), function (Blueprint $table) {
-            $table->unsignedBigInteger('role_id');
-            $table->unsignedBigInteger('permission_id');
+            $table->uuid('role_id');
+            $table->uuid('permission_id');
 
             $table->foreign('role_id')->references('id')
                   ->on(config('wk-core.table.role.roles'))
@@ -91,8 +96,8 @@ class CreateWkRoleTable extends Migration
         });
 
         Schema::create(config('wk-core.table.role.users_roles'), function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('role_id');
+            $table->uuid('user_id');
+            $table->uuid('role_id');
 
             $table->foreign('user_id')->references('id')
                   ->on(config('wk-core.table.user'))

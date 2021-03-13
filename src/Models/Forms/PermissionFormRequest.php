@@ -15,7 +15,7 @@ class PermissionFormRequest extends FormRequest
         $request = Request::instance();
         $data = $this->all();
         if ($request->isMethod('put') && empty($data['id']) && isset($request->id)) {
-            $data['id'] = (int) $request->id;
+            $data['id'] = (string) $request->id;
             $this->getInputSource()->replace($data);
         }
 
@@ -52,7 +52,7 @@ class PermissionFormRequest extends FormRequest
 
         $request = Request::instance();
         if ($request->isMethod('put') && isset($request->id)) {
-            $rules = array_merge($rules, ['id' => ['required','integer','min:1','exists:'.config('wk-core.table.role.permissions').',id']]);
+            $rules = array_merge($rules, ['id' => ['required','string','exists:'.config('wk-core.table.role.permissions').',id']]);
         }
 
         return $rules;
@@ -67,8 +67,7 @@ class PermissionFormRequest extends FormRequest
     {
         return [
             'id.required'         => trans('php-core::validation.required'),
-            'id.integer'          => trans('php-core::validation.integer'),
-            'id.min'              => trans('php-core::validation.min'),
+            'id.string'           => trans('php-core::validation.string'),
             'id.exists'           => trans('php-core::validation.exists'),
             'identifier.required' => trans('php-core::validation.required'),
             'identifier.max'      => trans('php-core::validation.max'),

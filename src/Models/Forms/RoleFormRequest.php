@@ -16,7 +16,7 @@ class RoleFormRequest extends FormRequest
         $request = Request::instance();
         $data = $this->all();
         if ($request->isMethod('put') && empty($data['id']) && isset($request->id)) {
-            $data['id'] = (int) $request->id;
+            $data['id'] = (string) $request->id;
             $this->getInputSource()->replace($data);
         }
 
@@ -46,7 +46,7 @@ class RoleFormRequest extends FormRequest
     {
         $rules = [
             'host_type'   => 'required_with:host_id|string',
-            'host_id'     => 'required_with:host_type|integer|min:1',
+            'host_id'     => 'required_with:host_type|string',
             'serial'      => '',
             'identifier'  => 'required|string|max:255',
             'is_enabled'  => 'required|boolean',
@@ -57,7 +57,7 @@ class RoleFormRequest extends FormRequest
 
         $request = Request::instance();
         if ($request->isMethod('put') && isset($request->id)) {
-            $rules = array_merge($rules, ['id' => ['required','integer','min:1','exists:'.config('wk-core.table.role.roles').',id']]);
+            $rules = array_merge($rules, ['id' => ['required','string','exists:'.config('wk-core.table.role.roles').',id']]);
         }
 
         return $rules;
@@ -72,14 +72,12 @@ class RoleFormRequest extends FormRequest
     {
         return [
             'id.required'             => trans('php-core::validation.required'),
-            'id.integer'              => trans('php-core::validation.integer'),
-            'id.min'                  => trans('php-core::validation.min'),
+            'id.string'               => trans('php-core::validation.string'),
             'id.exists'               => trans('php-core::validation.exists'),
             'host_type.required_with' => trans('php-core::validation.required_with'),
             'host_type.string'        => trans('php-core::validation.string'),
             'host_id.required_with'   => trans('php-core::validation.required_with'),
-            'host_id.integer'         => trans('php-core::validation.integer'),
-            'host_id.min'             => trans('php-core::validation.min'),
+            'host_id.string'          => trans('php-core::validation.string'),
             'identifier.required'     => trans('php-core::validation.required'),
             'identifier.max'          => trans('php-core::validation.max'),
             'is_enabled.required'     => trans('php-core::validation.required'),
