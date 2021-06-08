@@ -25,9 +25,10 @@ class RoleRepository extends Repository
      * @param Int     $page
      * @param Int     $nums per page
      * @param Boolean $is_enabled
-     * @return Array
+     * @param Boolean $toArray
+     * @return Array|Collection
      */
-    public function list(String $code, Array $data, $page = null, $nums = null, $is_enabled = null)
+    public function list(String $code, Array $data, $page = null, $nums = null, $is_enabled = null, $toArray = true)
     {
         $this->assertForPagination($page, $nums);
 
@@ -70,18 +71,22 @@ class RoleRepository extends Repository
                             ->when(is_integer($page) && is_integer($nums), function ($query) use ($page, $nums) {
                                 return $query->forPage($page, $nums);
                             });
-        $list = [];
-        foreach ($records as $record) {
-            $data = $record->toArray();
-            array_push($list,
-                array_merge($data, [
-                    'name'        => $record->findLangByKey('name'),
-                    'description' => $record->findLangByKey('description')
-                ])
-            );
-        }
+        if ($toArray) {
+            $list = [];
+            foreach ($records as $record) {
+                $data = $record->toArray();
+                array_push($list,
+                    array_merge($data, [
+                        'name'        => $record->findLangByKey('name'),
+                        'description' => $record->findLangByKey('description')
+                    ])
+                );
+            }
 
-        return $list;
+            return $list;
+        } else {
+            return $records;
+        }
     }
 
     /**
