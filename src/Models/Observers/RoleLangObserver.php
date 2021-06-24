@@ -42,7 +42,7 @@ class RoleLangObserver
                 ->where('key', $entity->key)
                 ->where('id', '<>', $entity->id);
 
-        if (config('wk-core.lang_log') || config('wk-role.lang_log'))
+        if (config('wk-role.soft_delete') && (config('wk-core.lang_log') || config('wk-role.lang_log')))
             $query->update(['is_current' => 0]);
         else
             $query->forceDelete();

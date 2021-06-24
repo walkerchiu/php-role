@@ -105,6 +105,10 @@ class PermissionObserver
      */
     public function deleted($entity)
     {
+        if (!config('php-role.soft_delete')) {
+            $entity->forceDelete();
+        }
+
         if ($entity->isForceDeleting()) {
             $entity->langs->withTrashed()->forceDelete();
         }
