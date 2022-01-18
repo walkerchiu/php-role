@@ -1,0 +1,62 @@
+# Laravel
+/storage/*.key
+/storage/logs/*
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/testing/*
+/storage/framework/views/*
+/storage/debugbar/*
+/vendor
+
+# Laravel 4 specific
+/app/storage/
+/bootstrap/compiled.php
+
+# Laravel 5 & Lumen specific
+/public/hot
+/public/storage
+
+# Laravel 5 & Lumen specific with changed public path
+/public_html/hot
+/public_html/storage
+
+# JavaScript
+/node_modules
+npm-debug.log
+yarn-error.log
+
+# OS generated files
+**/.DS_Store
+**/._*
+**/ehthumbs.db
+**/Thumbs.db
+.fseventsd
+.Spotlight-V100
+.Trashes
+
+# Compiled source
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Packages
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+.env
+.env.backup
+Homestead.json
+Homestead.yaml
+/.idea
+/.vscode
+/.vagrant
+.phpunit.result.cache
