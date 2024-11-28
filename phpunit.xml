@@ -1,0 +1,24 @@
+<phpunit>
+
+    <testsuites>
+        <testsuite name="Unit">
+            <directory suffix="RoleTest.php">./tests/Entities</directory>
+            <directory suffix="RoleLangTest.php">./tests/Entities</directory>
+            <directory suffix="RoleFormRequestTest.php">./tests/Forms</directory>
+
+            <directory suffix="PermissionTest.php">./tests/Entities</directory>
+            <directory suffix="PermissionLangTest.php">./tests/Entities</directory>
+            <directory suffix="PermissionFormRequestTest.php">./tests/Forms</directory>
+        </testsuite>
+        <testsuite name="Feature">
+            <directory suffix="RoleRepositoryTest.php">./tests/Repositories</directory>
+            <directory suffix="PermissionRepositoryTest.php">./tests/Repositories</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <env name="DB_CONNECTION" value="sqlite"/>
+        <env name="DB_DATABASE" value=":memory:"/>
+    </php>
+
+</phpunit>
+
