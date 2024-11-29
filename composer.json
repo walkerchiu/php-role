@@ -11,8 +11,8 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": "^7.3",
-        "walkerchiu/php-core": "^1.0"
+        "php": "^7.4|^8.0",
+        "walkerchiu/php-core": "^1.1"
     },
     "require-dev": {
         "orchestra/testbench": "^5.0"
