@@ -57,6 +57,5 @@ yarn-error.log
 Homestead.json
 Homestead.yaml
 /.idea
-/.vscode
 /.vagrant
 .phpunit.result.cache
